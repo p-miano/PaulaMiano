@@ -1,6 +1,6 @@
 # My Portfolio Website
 
-## Development steps
+## Initial Setup and Deploment to GitHub Pages
 
 * Created React project
 
@@ -30,6 +30,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 `npm start` 
 ```
 
+* Commited and pushed changes into GitHub repository.
+
+```console
+git add .
+git commit -m "Set up React project and added Bootstrap"
+git push origin main
+```
+
 * Installed the gh-pages package to deploy to GitHub Pages.
 
 ```console
@@ -57,3 +65,15 @@ npm install gh-pages --save-dev
 ```console
 npm run deploy
 ```
+
+## Development
+### Components
+#### Navbar
+* Code Explanation
+**scrollToSection(id) Function**
+The scrollToSection function is responsible for scrolling the page smoothly to the section corresponding to the provided ID. It uses JavaScript's `document.getElementById` method and calls scrollIntoView with the `{ behavior: 'smooth' }` option.
+* JSX Structure
+The JSX structure is wrapped in a `<nav>` element with Bootstrap classes for styling and responsiveness.
+* Branding: The brand name or logo is a link `(<a>)` with the navbar-brand class, set to redirect to the home section `(#home)`.
+* Responsive Toggler Button: The button appears on smaller screens and collapses the navbar into a hamburger icon.
+* Navigation Links: The navigation links have been replaced with `<button>` elements for better accessibility and use the scrollToSection function to scroll to different sections of the page.

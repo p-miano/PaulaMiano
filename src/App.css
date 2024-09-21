@@ -1,38 +1,63 @@
-.App {
+/* Global Styles */
+/* =============================== */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Section Customization */
+/* =============================== */
+section {
+  padding: 4rem; /* Provides spacing for sections */
   text-align: center;
+  scroll-margin-top: 70px; /* Adjust according to the navbar height */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Navbar Styling */
+/* =============================== */
+.navbar {
+  height: 70px; /* Fixed height for the navbar */
+  font-family: 'Poppins', sans-serif; /* Modern, clean font */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.75rem; /* Increase font size of the branding */
+  color: #2c3e50; /* Darker shade for the logo */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.navbar-nav .nav-link {
+  font-size: 1.125rem; /* Increase font size of the links */
+  padding-left: 1.5rem; /* More space between links */
+  padding-right: 1.5rem;
+  color: #6c757d; /* Default color for links */
+  cursor: pointer; /* Pointer changes to hand on hover */
+  background-color: transparent; /* Ensure buttons look like links */
+  border: none; /* Remove button borders */
 }
 
-.App-link {
-  color: #61dafb;
+.navbar-nav .nav-link.active {
+  color: #e83e8c; /* Highlight active link in pink */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.navbar-nav .nav-link:hover {
+  color: #e83e8c; /* Pink hover effect on nav links */
+}
+
+.navbar-nav .btn-link {
+  padding: 0; /* Removes padding from the button to make it resemble a link */
+  font-size: inherit; /* Inherit font size from parent element */
+  text-decoration: none; /* Remove underline from the button */
+}
+
+
+/* Responsive behavior for smaller screens */
+/* =============================== */
+@media (max-width: 576px) {
+  .navbar {
+    padding: 1rem; /* Reduce padding on smaller screens */
   }
 }
