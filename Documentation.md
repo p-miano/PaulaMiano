@@ -67,8 +67,11 @@ npm run deploy
 ```
 
 ## Development
+
 ### Components
+
 #### Navbar
+
 * Code Explanation
 **scrollToSection(id) Function**
 The scrollToSection function is responsible for scrolling the page smoothly to the section corresponding to the provided ID. It uses JavaScript's `document.getElementById` method and calls scrollIntoView with the `{ behavior: 'smooth' }` option.
