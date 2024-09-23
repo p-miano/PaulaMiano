@@ -1021,3 +1021,173 @@ export default Experience;
   }
 }
 ```
+
+#### Education
+
+* The `Education` section is designed in a similar timeline format as the Work Experience section, showcasing academic achievements in reverse chronological order. Each timeline item includes the degree, institution, and key details, making it easy for users to review qualifications.
+
+* **JSX Structure:** Each timeline item contains:
+  * A date range for the duration of the course.
+  * The name of the degree or certification.
+  * The name of the educational institution.
+
+```javascript
+import React from 'react';
+
+const Education = () => {
+    return (
+        <section id="education" className="p-5 bg-light">
+            <div className="container">
+                {/* Section Title */}
+                <h2 className="text-left">Education</h2>
+                <div className="underline"></div>
+
+                {/* Education Timeline */}
+                <div className="timeline">
+                    <div className="timeline-item">
+                        <div className="timeline-date">
+                            2023-2024
+                        </div>
+                        <div className="timeline-content">
+                            <h5>AEC - Information Technology Programmer-Analyst</h5>
+                            <p>LaSalle College, Montreal, Canada</p>
+                        </div>
+                    </div>
+
+                    <div className="timeline-item">
+                        <div className="timeline-date">
+                            2010-2013
+                        </div>
+                        <div className="timeline-content">
+                            <h5>Postgraduate Certificate in Strategic Contracting Management</h5>
+                            <p>Federal University of Bahia, Brazil</p>
+                        </div>
+                    </div>
+
+                    <div className="timeline-item">
+                        <div className="timeline-date">
+                            2004-2007
+                        </div>
+                        <div className="timeline-content">
+                            <h5>Bachelor's in Business Administration</h5>
+                            <p>State University of São Paulo, Brazil</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default Education;
+```
+
+* **Styling:** The styling for the `Education` section follows the same layout and visual structure as the `Work Experience` section to maintain consistency.
+
+```css
+/* Education Section Styling */
+/* =============================== */
+#education {
+  background-color: #f8f9fa;
+  padding: 4rem 0;
+}
+
+#education h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: left;
+}
+
+.underline {
+  width: 50px;
+  height: 3px;
+  background-color: #e83e8c; /* Pink underline */
+  margin: 10px 0 40px 0; /* Adjust spacing */
+}
+
+/* Timeline Styling */
+.timeline {
+  position: relative;
+  padding: 2rem 0;
+  margin-top: 2rem;
+}
+
+/* The timeline vertical line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 35%; /* Adjusted to appear between date and content */
+  width: 2px;
+  background: #e83e8c; /* Pink line */
+  transform: translateX(-50%);
+}
+
+/* Timeline item container */
+.timeline-item {
+  display: flex;
+  margin-bottom: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+/* Dates aligned to the left */
+.timeline-date {
+  width: 30%; /* Dates take up the left 30% */
+  text-align: right;
+  padding-right: 2rem; /* Space between date and timeline */
+  font-weight: bold;
+  color: #6c757d;
+}
+
+/* Timeline content */
+.timeline-content {
+  width: 60%; /* Content takes up the remaining space */
+  background-color: #ffffff;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  margin-left: 1rem;
+}
+
+/* Circle Checkmarks */
+.timeline-item::before {
+  content: '✔';
+  position: absolute;
+  left: 35%; /* Align checkmarks with the timeline */
+  transform: translateX(-50%);
+  font-size: 1.25rem;
+  color: #e83e8c !important; /* Pink checkmark */
+  background: white;
+  border: 2px solid #e83e8c !important; /* Pink border */
+  border-radius: 50%; /* Circle shape */
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Adjust the timeline for mobile responsiveness */
+@media (max-width: 576px) {
+  .timeline::before {
+    left: 10%; /* Adjust timeline position for smaller screens */
+  }
+
+  .timeline-item::before {
+    left: 10%; /* Adjust checkmark position for smaller screens */
+  }
+
+  .timeline-content {
+    width: 85%; /* More width for content on mobile */
+  }
+
+  .timeline-date {
+    width: 15%; /* Less space for dates on mobile */
+  }
+}
+```
+
