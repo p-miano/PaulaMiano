@@ -135,3 +135,56 @@ section {
 .home-content {
   animation: fadeIn 2s ease-in-out; /* Applies the fade-in animation over 2 seconds */
 }
+
+/* About Section Styling */
+/* =============================== */
+#about {
+  background-color: #f8f9fa; /* Light background for contrast */
+  padding: 4rem 0; /* Top and bottom padding for spacing */
+}
+
+#about h2 {
+  font-size: 2.5rem; /* Larger font size for the About heading */
+  font-weight: bold; /* Bold for emphasis */
+  text-align: left; /* Left-align the heading */
+}
+
+.underline {
+  width: 50px; /* Set the underline width */
+  height: 3px; /* Set the underline thickness */
+  background-color: #e83e8c; /* Pink color for the underline */
+  margin: 10px 0 40px 0; /* Spacing above and below the underline */
+}
+
+#about p.lead {
+  font-size: 1.25rem; /* Larger font size for lead paragraph */
+  color: #6c757d; /* Gray color for the text */
+  text-align: left; /* Left-align the text */
+  margin-bottom: 20px; /* Bottom margin for spacing */
+}
+
+#about .text-left {
+  text-align: left; /* Ensure all text is left-aligned */
+}
+
+#about img {
+  margin-bottom: 20px; /* Space below the image */
+  object-fit: cover; /* Ensure image covers the allocated area without stretching */
+}
+
+/* Download Resume Button Styling */
+/* =============================== */
+.btn-outline-primary {
+  font-size: 1.125rem; /* Adjust font size of the button text */
+  padding: 0.75rem 2rem; /* Padding inside the button for a larger click area */
+  border-radius: 50px; /* Round the button corners */
+  border-color: #e83e8c !important; /* Pink border color */
+  color: #e83e8c !important; /* Pink text color */
+}
+
+.btn-outline-primary:hover {
+  background-color: #e83e8c !important; /* Change to pink background on hover */
+  color: white !important; /* White text color on hover */
+  border-color: #e83e8c !important; /* Keep the pink border on hover */
+}
+
