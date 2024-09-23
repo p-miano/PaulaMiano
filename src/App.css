@@ -266,3 +266,227 @@ section {
 }
 
 
+/* Portfolio Section Styling */
+/* =============================== */
+#portfolio h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: left;
+}
+
+.portfolio-filters .btn {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  border-radius: 50px; /* Rounded filter buttons */
+}
+
+.portfolio-filters .btn-primary {
+  background-color: #e83e8c; /* Pink active filter */
+  color: white;
+  border-color: #e83e8c;
+}
+
+.portfolio-filters .btn-light {
+  background-color: #f8f9fa;
+  color: #6c757d;
+}
+
+.card {
+  width: 100%; /* Ensure the card takes full width */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Lift card on hover */
+}
+
+/* Portfolio Button Styling */
+.portfolio-buttons {
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+  justify-content: flex-end; /* Ensure buttons stay at the bottom */
+  gap: 0.5rem; /* Small space between the buttons */
+  margin-top: auto; /* Push buttons to the bottom */
+}
+
+.portfolio-buttons a {
+  flex: 1; /* Make both buttons take full width of the container */
+  text-align: center;
+  padding: 0.5rem; /* Reduced padding for smaller button height */
+  font-size: 1rem;
+  border-radius: 5px; /* Small rounded corners */
+  background-color: transparent;
+  border-color: #e83e8c;
+  color: #e83e8c;
+}
+
+.portfolio-buttons a:hover {
+  background-color: #e83e8c;
+  color: white;
+  border-color: #e83e8c;
+}
+
+/* Ensure the card takes full height */
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Make sure the card takes the full height */
+}
+
+/* Ensure the card body takes full height */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Space between content and buttons */
+}
+
+/* Ensure the buttons are always at the bottom */
+.portfolio-buttons {
+  margin-top: auto; /* Push buttons to the bottom */
+}
+
+/* Work Experience Section Styling */
+/* =============================== */
+#work-experience {
+  background-color: #f8f9fa;
+  padding: 4rem 0;
+}
+
+#work-experience h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: left;
+}
+
+.underline {
+  width: 50px;
+  height: 3px;
+  background-color: #e83e8c; /* Pink underline */
+  margin: 10px 0 40px 0; /* Adjust spacing */
+}
+
+/* Timeline Styling */
+.timeline {
+  position: relative; 
+  padding: 2rem 0;
+  margin-top: 2rem;
+}
+
+/* The timeline vertical line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 35%; /* Adjusted to appear between date and content */
+  width: 2px;
+  background: #e83e8c; /* Pink line */
+  transform: translateX(-50%);
+}
+
+/* Timeline item container */
+.timeline-item {
+  display: flex;
+  margin-bottom: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+/* Dates aligned to the left */
+.timeline-date {
+  width: 30%; /* Dates take up the left 30% */
+  text-align: right;
+  padding-right: 2rem; /* Space between date and timeline */
+  font-weight: bold;
+  color: #6c757d;
+}
+
+/* Timeline content */
+.timeline-content {
+  width: 60%; /* Content takes up the remaining space */
+  background-color: #ffffff;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  margin-left: 1rem;
+}
+
+  /* Remove bullet points from lists */
+  .timeline-content ul {
+    list-style-type: none; /* Removes bullet points */
+    padding-left: 0; /* Removes default padding */
+  }
+
+  .timeline-item::before {
+    content: '\2713';
+    position: absolute;
+    left: 35%; /* Align checkmarks with the timeline */
+    transform: translateX(-50%);
+    font-size: 1.25rem;
+    color: #e83e8c !important; /* Pink checkmark */
+    background: white;
+    border: 2px solid #e83e8c !important; /* Pink border */
+    border-radius: 50%; /* Circle shape */
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+/* Forcing checkmark color with higher specificity */
+.timeline-item::before {
+  color: #e83e8c !important; /* Pink checkmark */
+  border: 2px solid #e83e8c !important; /* Pink border */
+}
+
+/* Skills Badges */
+.skills {
+  margin-top: 1rem;
+}
+
+.skill-badge {
+  display: inline-block;
+  background-color: #e83e8c!important; /* Pink badge background */
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px; /* Rounded badges */
+  font-size: 0.875rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Adjust the timeline for mobile responsiveness */
+@media (max-width: 576px) {
+  .timeline::before {
+    left: 10%; /* Adjust timeline position for smaller screens */
+  }
+
+  .timeline-item::before {
+    left: 10%; /* Adjust checkmark position for smaller screens */
+  }
+
+  .timeline-content {
+    width: 85%; /* More width for content on mobile */
+  }
+
+
+  .timeline-date {
+    width: 15%; /* Less space for dates on mobile */
+  }
+
+  .skill-badge {
+    font-size: 0.75rem; /* Smaller badges on mobile */
+    padding: 0.2rem 0.5rem;
+  }
+}
+
+
+
+
+

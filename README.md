@@ -570,3 +570,454 @@ export default Skills;
   height: 100%; /* Make card body fill the card's height */
 }
 ```
+
+#### Portfolio
+
+* The `Portfolio` component dynamically showcases my projects categorized into different sections: Web, Desktop, Mobile, and API. It allows filtering by category and provides links to both the GitHub repository and the deployed site (if available).
+
+* **JSX Structure:** The portfolio is rendered as a grid of cards. Each card represents a project and contains:
+  * A title
+  * A short description
+  * Buttons linking to the GitHub repository and a live deployed site (if applicable).
+
+```javascript
+import React, { useState, useEffect } from 'react';
+
+const projectsData = [
+    {
+        id: 1,
+        title: "My Portfolio Website",
+        category: "Web",
+        description: "Responsive website built with React and Bootstrap, featuring dynamic sections and showcasing my skills and projects.",
+        githubLink: "https://github.com/p-miano/PaulaMiano.git",
+        deployedLink: "https://p-miano.github.io/PaulaMiano"
+    },
+    {
+        id: 2,
+        title: "Hi Tech Distribution",
+        category: "Desktop",
+        description: "Windows application for managing inventory and orders.",
+        githubLink: "https://github.com/p-miano/MultiTier-HiTechDistributionManagementSystem.git",
+        deployedLink: null
+    },
+    {
+        id: 3,
+        title: "Tech Books",
+        category: "Web",
+        description: "Web application for managing books.",
+        githubLink: "https://github.com/p-miano/WebServerII-TechBooksV2.git",
+        deployedLink: null
+    },
+    {
+        id: 4,
+        title: "ToDo App",
+        category: "Mobile",
+        description: "Android application for managing tasks.",
+        githubLink: "https://github.com/p-miano/Android-TaskManager.git",
+        deployedLink: null
+    },
+    {
+        id: 5,
+        title: "City Info API",
+        category: "API",
+        description: "Web API designed to provide detailed information about cities and their points of interest.",
+        githubLink: "https://github.com/p-miano/CityInfoAPI.git",
+        deployedLink: null
+    }
+];
+
+const Portfolio = () => {
+    const [selectedCategory, setSelectedCategory] = useState('All');
+    const [filteredProjects, setFilteredProjects] = useState(projectsData);
+
+    useEffect(() => {
+        let projectsToDisplay = [...projectsData];
+
+        if (selectedCategory !== 'All') {
+            projectsToDisplay = projectsToDisplay.filter(project => project.category === selectedCategory);
+        }
+
+        projectsToDisplay.sort((a, b) => a.title.localeCompare(b.title));
+        setFilteredProjects(projectsToDisplay);
+    }, [selectedCategory]);
+
+    return (
+        <section id="portfolio" className="p-5 bg-light">
+            <div className="container">
+                <h2 className="text-left">Portfolio</h2>
+                <div className="underline"></div>
+
+                <div className="portfolio-filters mb-4">
+                    <button className={`btn ${selectedCategory === 'All' ? 'btn-primary' : 'btn-light'}`} onClick={() => setSelectedCategory('All')}>All</button>
+                    <button className={`btn ${selectedCategory === 'API' ? 'btn-primary' : 'btn-light'}`} onClick={() => setSelectedCategory('API')}>API</button>
+                    <button className={`btn ${selectedCategory === 'Desktop' ? 'btn-primary' : 'btn-light'}`} onClick={() => setSelectedCategory('Desktop')}>Desktop</button>
+                    <button className={`btn ${selectedCategory === 'Mobile' ? 'btn-primary' : 'btn-light'}`} onClick={() => setSelectedCategory('Mobile')}>Mobile</button>
+                    <button className={`btn ${selectedCategory === 'Web' ? 'btn-primary' : 'btn-light'}`} onClick={() => setSelectedCategory('Web')}>Web</button>
+                </div>
+
+                <div className="row">
+                    {filteredProjects.map(project => (
+                        <div className="col-md-4 mb-4" key={project.id}>
+                            <div className="card h-100 d-flex flex-column">
+                                <div className="card-body d-flex flex-column">
+                                    <h5 className="card-title">{project.title}</h5>
+                                    <p className="card-text">{project.description}</p>
+                                    <div className="portfolio-buttons mt-auto">
+                                        <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="btn btn-outline-primary">
+                                            View on GitHub
+                                        </a>
+                                        {project.deployedLink && (
+                                            <a href={project.deployedLink} target="_blank" rel="noopener noreferrer" className="btn btn-outline-primary">
+                                                Visit Site
+                                            </a>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
+
+export default Portfolio;
+```
+
+* **Styling:** The styling for the Portfolio section includes the use of Bootstrap’s grid layout for responsive design. The cards have a hover effect for interaction, and buttons are styled to match the theme of the portfolio.
+
+```css
+/* Portfolio Section Styling */
+/* =============================== */
+#portfolio h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: left;
+}
+
+.portfolio-filters .btn {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  border-radius: 50px; /* Rounded filter buttons */
+}
+
+.portfolio-filters .btn-primary {
+  background-color: #e83e8c; /* Pink active filter */
+  color: white;
+  border-color: #e83e8c;
+}
+
+.portfolio-filters .btn-light {
+  background-color: #f8f9fa;
+  color: #6c757d;
+}
+
+.card {
+  width: 100%; /* Ensure the card takes full width */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: none;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Lift card on hover */
+}
+
+/* Portfolio Button Styling */
+.portfolio-buttons {
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+  justify-content: flex-end; /* Ensure buttons stay at the bottom */
+  gap: 0.5rem; /* Small space between the buttons */
+  margin-top: auto; /* Push buttons to the bottom */
+}
+
+.portfolio-buttons a {
+  flex: 1; /* Make both buttons take full width of the container */
+  text-align: center;
+  padding: 0.5rem; /* Reduced padding for smaller button height */
+  font-size: 1rem;
+  border-radius: 5px; /* Small rounded corners */
+  background-color: transparent;
+  border-color: #e83e8c;
+  color: #e83e8c;
+}
+
+.portfolio-buttons a:hover {
+  background-color: #e83e8c;
+  color: white;
+  border-color: #e83e8c;
+}
+
+/* Ensure the card takes full height */
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Make sure the card takes the full height */
+}
+
+/* Ensure the card body takes full height */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Space between content and buttons */
+}
+
+/* Ensure the buttons are always at the bottom */
+.portfolio-buttons {
+  margin-top: auto; /* Push buttons to the bottom */
+}
+```
+
+#### Work Experience
+
+* The `Work Experience` section in the portfolio uses a timeline format to display job roles and achievements chronologically. Each timeline item features a job title, company information, and bullet points highlighting key responsibilities or accomplishments. In addition, each role is accompanied by skill badges representing the technologies and skills utilized during the job.
+
+* **JSX Structure:** Each timeline item contains:
+  * A date range for the job position.
+  * A title for the role.
+  * A list of key responsibilities.
+  * Skill badges at the bottom to indicate areas of expertise.
+
+```javascript
+import React from 'react';
+
+const Experience = () => {
+    return (
+        <section id="work-experience" className="p-5 bg-light">
+            <div className="container">
+                {/* Section Title */}
+                <h2 className="text-left">Work Experience</h2>
+                <div className="underline"></div>
+
+                {/* Experience Timeline */}
+                <div className="timeline">
+                    <div className="timeline-item">
+                        <div className="timeline-date">
+                            Oct 2021 - Apr 2023
+                        </div>
+                        <div className="timeline-content">
+                            <h5>Contract Manager</h5>
+                            <p>PETROBRAS PETROLEO BRASILEIRO SA, Santos, São Paulo, Brazil</p>
+                            <ul>
+                                <li>Negotiated deals like a pro (and kept everyone happy!).</li>
+                                <li>Managed contracts through every stage—yes, even the boring parts.</li>
+                                <li>Kept an eagle eye on contract performance to make sure everything ran smoothly.</li>
+                            </ul>
+                            <div className="skills">
+                                <span className="skill-badge">Negotiation</span>
+                                <span className="skill-badge">Conflict Resolution</span>
+                                <span className="skill-badge">Teamwork</span>
+                                <span className="skill-badge">Contract Negotiation</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="timeline-item">
+                        <div className="timeline-date">
+                            Oct 2017 - Sep 2021
+                        </div>
+                        <div className="timeline-content">
+                            <h5>Business Intelligence Analyst</h5>
+                            <p>PETROBRAS PETROLEO BRASILEIRO SA, Santos, São Paulo, Brazil</p>
+                            <ul>
+                                <li>Created dashboards that made data look cool.</li>
+                                <li>Turned raw data into actionable insights, like a data wizard.</li>
+                                <li>Collaborated with everyone to make the business run smoother.</li>
+                            </ul>
+                            <div className="skills">
+                                <span className="skill-badge">Power BI</span>
+                                <span className="skill-badge">SQL</span>
+                                <span className="skill-badge">ETL</span>
+                                <span className="skill-badge">VBA</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="timeline-item">
+                        <div className="timeline-date">
+                            Oct 2014 - Oct 2017
+                        </div>
+                        <div className="timeline-content">
+                            <h5>Contract Inspector</h5>
+                            <p>PETROBRAS PETROLEO BRASILEIRO SA, Rio de Janeiro, Brazil</p>
+                            <ul>
+                                <li>Inspected projects like Sherlock, but for contracts and compliance.</li>
+                                <li>Ensured all invoices and work reports were accurate and on point.</li>
+                                <li>Kept contractors and internal teams communicating smoothly.</li>
+                            </ul>
+                            <div className="skills">
+                                <span className="skill-badge">EHS</span>
+                                <span className="skill-badge">Contract Compliance</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="timeline-item">
+                        <div className="timeline-date">
+                            Apr 2008 - Oct 2014
+                        </div>
+                        <div className="timeline-content">
+                            <h5>Business Process Analyst</h5>
+                            <p>PETROBRAS PETROLEO BRASILEIRO SA, São Paulo, Brazil</p>
+                            <ul>
+                                <li>Streamlined processes like a productivity ninja.</li>
+                                <li>Implemented data-driven improvements that made workflows sing.</li>
+                                <li>Worked with teams to deploy systems that actually worked.</li>
+                            </ul>
+                            <div className="skills">
+                                <span className="skill-badge">Process Optimization</span>
+                                <span className="skill-badge">Strategic Planning</span>
+                                <span className="skill-badge">Continuous Improvement</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+}
+
+export default Experience;
+```
+
+* **Styling:** The styling for the Portfolio section includes the use of Bootstrap’s grid layout for responsive design. The cards have a hover effect for interaction, and buttons are styled to match the theme of the portfolio.
+  * **Key CSS Features**
+    * **Checkmarks and Timeline:** The checkmarks and vertical timeline line are styled using pseudo-elements and positioned between the date and job description.
+    * **Responsive Layout:** Media queries ensure that the timeline adjusts properly for smaller screens, reducing space between elements.
+
+```css
+/* Work Experience Section Styling */
+/* =============================== */
+#work-experience {
+  background-color: #f8f9fa;
+  padding: 4rem 0;
+}
+
+#work-experience h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: left;
+}
+
+.underline {
+  width: 50px;
+  height: 3px;
+  background-color: #e83e8c; /* Pink underline */
+  margin: 10px 0 40px 0; /* Adjust spacing */
+}
+
+/* Timeline Styling */
+.timeline {
+  position: relative;
+  padding: 2rem 0;
+  margin-top: 2rem;
+}
+
+/* The timeline vertical line */
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 35%; /* Adjusted to appear between date and content */
+  width: 2px;
+  background: #e83e8c; /* Pink line */
+  transform: translateX(-50%);
+}
+
+/* Timeline item container */
+.timeline-item {
+  display: flex;
+  margin-bottom: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+/* Dates aligned to the left */
+.timeline-date {
+  width: 30%; /* Dates take up the left 30% */
+  text-align: right;
+  padding-right: 2rem; /* Space between date and timeline */
+  font-weight: bold;
+  color: #6c757d;
+}
+
+/* Timeline content */
+.timeline-content {
+  width: 60%; /* Content takes up the remaining space */
+  background-color: #ffffff;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  margin-left: 1rem;
+}
+
+/* Remove bullet points from lists */
+.timeline-content ul {
+  list-style-type: none; /* Removes bullet points */
+  padding-left: 0; /* Removes default padding */
+}
+
+/* Circle Checkmarks */
+.timeline-item::before {
+  content: '✔';
+  position: absolute;
+  left: 35%; /* Align checkmarks with the timeline */
+  transform: translateX(-50%);
+  font-size: 1.25rem;
+  color: #e83e8c !important; /* Pink checkmark */
+  background: white;
+  border: 2px solid #e83e8c !important; /* Pink border */
+  border-radius: 50%; /* Circle shape */
+  padding: 5px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Skills Badges */
+.skills {
+  margin-top: 1rem;
+}
+
+.skill-badge {
+  display: inline-block;
+  background-color: #e83e8c!important; /* Pink badge background */
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 50px; /* Rounded badges */
+  font-size: 0.875rem;
+  margin-right: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Adjust the timeline for mobile responsiveness */
+@media (max-width: 576px) {
+  .timeline::before {
+    left: 10%; /* Adjust timeline position for smaller screens */
+  }
+
+  .timeline-item::before {
+    left: 10%; /* Adjust checkmark position for smaller screens */
+  }
+
+  .timeline-content {
+    width: 85%; /* More width for content on mobile */
+  }
+
+  .timeline-date {
+    width: 15%; /* Less space for dates on mobile */
+  }
+
+  .skill-badge {
+    font-size: 0.75rem; /* Smaller badges on mobile */
+    padding: 0.2rem 0.5rem;
+  }
+}
+```
