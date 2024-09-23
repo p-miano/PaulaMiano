@@ -419,3 +419,154 @@ export default About;
   border-color: #e83e8c !important; /* Keep the pink border on hover */
 }
 ```
+
+#### Skills
+
+* The `Skills` section presents Paula's technical abilities in a card-based format. Each card focuses on a different area of expertise, from programming languages to cloud services. Icons are used to visually represent each skill category, enhancing the layout and readability.
+
+* **Installing React Icons**
+
+```console
+npm install react-icons --save
+```
+
+* **JSX Structure:** The section is structured into a grid layout using Bootstrap's row and col-md-6 classes to display the cards in a responsive two-column format. Each card contains an icon, title, and descriptive text. The descriptive text often includes a humorous tone to make the portfolio more engaging.
+
+```javascript
+import React from 'react';
+import { FaCode, FaCogs, FaDatabase, FaCloud, FaDocker, FaMobileAlt, FaGithub } from 'react-icons/fa';
+
+const Skills = () => {
+    return (
+        <section id="skills" className="p-5 bg-light">
+            <div className="container">
+                <h2 className="text-left">Skills</h2>
+                <div className="underline"></div>
+
+                <div className="row">
+                    {/* Programming Languages */}
+                    <div className="col-md-6 mb-4">
+                        <div className="card h-100 text-center">
+                            <div className="card-body">
+                                <FaCode className="icon mb-3" size={50} />
+                                <h5 className="card-title">Programming Languages</h5>
+                                <p className="skill-text">
+                                    <strong>C#, Java</strong><br />
+                                    <span className="joke-text">– My battle-hardened warriors, always by my side in the toughest coding quests.</span><br />
+                                    <strong>JavaScript, HTML, CSS</strong><br />
+                                    <span className="joke-text">– Reliable partners, we tackle front-end challenges like a dynamic trio.</span><br />
+                                    <strong>PHP, Python</strong><br />
+                                    <span className="joke-text">– We’ve had our adventures, but we're still on good terms.</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Frameworks */}
+                    <div className="col-md-6 mb-4">
+                        <div className="card h-100 text-center">
+                            <div className="card-body">
+                                <FaCogs className="icon mb-3" size={50} />
+                                <h5 className="card-title">Frameworks</h5>
+                                <p className="skill-text">
+                                    <strong>ASP.Net Core MVC, React</strong><br />
+                                    <span className="joke-text">– My ride-or-die frameworks, making me look good.</span><br />
+                                    <strong>Bootstrap</strong><br />
+                                    <span className="joke-text">– Fashion for websites. I keep things slick.</span><br />
+                                    <strong>Razor Pages</strong><br />
+                                    <span className="joke-text">– Like catching up with an old friend.</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Continue with other skills... */}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default Skills;
+```
+
+* **Styling:** The CSS for the `Skills` section uses card-based designs with hover effects. The icons are placed in the top-left corner of the cards to visually distinguish the skill categories. The text includes a main description (`skill-text`) and a humorous secondary description (`joke-text`).
+
+```css
+/* Skills Section Styling */
+/* =============================== */
+
+#skills {
+  background-color: #f8f9fa; /* Light grey background */
+  padding: 4rem 0; /* Vertical padding */
+}
+
+#skills h2 {
+  font-size: 2.5rem; /* Large heading size */
+  font-weight: bold; /* Bold heading */
+  text-align: left; /* Align the heading to the left */
+}
+
+.underline {
+  width: 50px; /* Width of the pink underline */
+  height: 3px; /* Height of the pink underline */
+  background-color: #e83e8c; /* Pink color */
+  margin: 10px 0 40px 0; /* Margin for spacing */
+}
+
+.card {
+  border: none; /* Remove border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: transform 0.3s ease; /* Smooth transition for hover effect */
+  position: relative; /* Relative positioning for icons */
+}
+
+.card:hover {
+  transform: scale(1.05); /* Slight zoom-in on hover */
+}
+
+/* Icon Styling */
+.icon {
+  position: absolute; /* Icon placed at the top-left of the card */
+  top: 15px;
+  left: 15px;
+  color: #6c757d; /* Grey color for icons */
+}
+
+/* Content styling for the card body */
+.card-body {
+  padding: 2rem; /* Padding inside the card */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically center the content */
+  text-align: center; /* Horizontally center the content */
+}
+
+.card-title {
+  font-weight: bold; /* Bold title */
+  color: #e83e8c !important; /* Pink color for the title */
+  margin-top: 1rem; /* Margin between icon and title */
+}
+
+/* Skill text styling */
+.skill-text {
+  font-size: 1.1rem; /* Slightly larger text for skills */
+  font-weight: bold;
+  color: #2c3e50; /* Darker shade for skill names */
+}
+
+/* Joke text styling */
+.joke-text {
+  font-size: 0.9rem; /* Smaller size for joke lines */
+  color: #6c757d; /* Light grey color */
+}
+
+/* Ensure card takes up full height */
+.card {
+  height: 100%; /* Make card fill the container's height */
+}
+
+.card-body {
+  height: 100%; /* Make card body fill the card's height */
+}
+```

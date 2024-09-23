@@ -188,3 +188,81 @@ section {
   border-color: #e83e8c !important; /* Keep the pink border on hover */
 }
 
+/* Skills Section Styling */
+/* =============================== */
+
+#skills {
+  background-color: #f8f9fa; /* Light grey background */
+  padding: 4rem 0; /* Vertical padding */
+}
+
+#skills h2 {
+  font-size: 2.5rem; /* Large heading size */
+  font-weight: bold; /* Bold heading */
+  text-align: left; /* Align the heading to the left */
+}
+
+.underline {
+  width: 50px; /* Width of the pink underline */
+  height: 3px; /* Height of the pink underline */
+  background-color: #e83e8c; /* Pink color */
+  margin: 10px 0 40px 0; /* Margin for spacing */
+}
+
+.card {
+  border: none; /* Remove border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: transform 0.3s ease; /* Smooth transition for hover effect */
+  position: relative; /* Relative positioning for icons */
+}
+
+.card:hover {
+  transform: scale(1.05); /* Slight zoom-in on hover */
+}
+
+/* Icon Styling */
+.icon {
+  position: absolute; /* Icon placed at the top-left of the card */
+  top: 15px;
+  left: 15px;
+  color: #6c757d; /* Grey color for icons */
+}
+
+/* Content styling for the card body */
+.card-body {
+  padding: 2rem; /* Padding inside the card */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically center the content */
+  text-align: center; /* Horizontally center the content */
+}
+
+.card-title {
+  font-weight: bold; /* Bold title */
+  color: #e83e8c !important; /* Pink color for the title */
+  margin-top: 1rem; /* Margin between icon and title */
+}
+
+/* Skill text styling */
+.skill-text {
+  font-size: 1.1rem; /* Slightly larger text for skills */
+  font-weight: bold;
+  color: #2c3e50; /* Darker shade for skill names */
+}
+
+/* Joke text styling */
+.joke-text {
+  font-size: 0.9rem; /* Smaller size for joke lines */
+  color: #6c757d; /* Light grey color */
+}
+
+/* Ensure card takes up full height */
+.card {
+  height: 100%; /* Make card fill the container's height */
+}
+
+.card-body {
+  height: 100%; /* Make card body fill the card's height */
+}
+
+
