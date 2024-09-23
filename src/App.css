@@ -74,7 +74,7 @@ section {
 #home {
   position: relative;
   height: 100vh; /* Full viewport height to cover the screen */
-  background-image: url(/build/images/home-illustration.webp); /* Background image link */
+  background-image: url('/public/images/home-illustration.webp'); /* Background image link */
   background-size: cover; /* Ensures the background image covers the entire section */
   background-position: center; /* Centers the background image */
   background-repeat: no-repeat; /* Prevents the background image from repeating */
