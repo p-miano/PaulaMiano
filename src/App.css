@@ -604,6 +604,118 @@ section {
   }
 }
 
+/* Contact Section Styling */
+/* =============================== */
+#contact h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: left;
+}
+
+.contact-info p {
+  font-weight: bold;
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+}
+
+.contact-info a {
+  color: #6c757d;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.contact-info a:hover {
+  color: #e83e8c; /* Pink hover effect */
+}
+
+.contact-icon {
+  font-size: 1.5rem;
+  color: #e83e8c;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+/* Align the contact info and form to the top */
+.contact-info,
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.row {
+  align-items: flex-start;
+}
+
+/* Contact Form Styling */
+form .form-control {
+  border-radius: 5px;
+  font-size: 1rem;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+form .btn-primary {
+  background-color: #e83e8c;
+  border-color: #e83e8c;
+  padding: 0.75rem 2rem;
+  font-size: 1.125rem;
+  border-radius: 50px;
+  width: auto; /* Set width to auto */
+  max-width: fit-content; /* Force button to fit content */
+}
+
+form .btn-primary:hover {
+  background-color: #d63384;
+  border-color: #d63384;
+}
+
+/* Footer Styling */
+/* =============================== */
+.footer {
+  background-color: #343a40;
+  color: white;
+  padding: 2rem 0;
+}
+
+.footer h5 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.footer p {
+  margin: 0;
+  margin-top: 10px;
+  font-size: 0.875rem;
+}
+
+.footer-icon {
+  color: #f8f9fa;
+  font-size: 1.5rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-icon:hover {
+  color: #e83e8c;
+}
+
+.footer a {
+  text-decoration: none;
+  color: white;
+}
+
+.footer a:hover {
+  color: #e83e8c;
+}
+
+/* Footer Responsiveness */
+@media (max-width: 576px) {
+  .footer {
+      text-align: center;
+  }
+}
 
 
 

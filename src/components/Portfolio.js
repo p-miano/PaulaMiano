@@ -80,7 +80,7 @@ const Portfolio = () => {
                 </div>
 
                 {/* Project Cards */}
-                <div className="row">
+                <div className="row align-items-stretch">
                     {filteredProjects.map(project => (
                         <div className="col-md-4 mb-4" key={project.id}>
                             <div className="card h-100 d-flex flex-column">
