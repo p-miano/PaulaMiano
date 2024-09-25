@@ -16,7 +16,7 @@ const Experience = () => {
                         </div>
                         <div className="timeline-content">
                             <h5>Contract Manager</h5>
-                            <p>PETROBRAS PETROLEO BRASILEIRO SA, Santos, São Paulo, Brazil</p>
+                            <p>Petrobras, Santos, Brazil</p>
                             <ul>
                                 <li>Negotiated deals like a pro (and kept everyone happy!).</li>
                                 <li>Managed contracts through every stage—yes, even the boring parts.</li>
@@ -37,7 +37,7 @@ const Experience = () => {
                         </div>
                         <div className="timeline-content">
                             <h5>Business Intelligence Analyst</h5>
-                            <p>PETROBRAS PETROLEO BRASILEIRO SA, Santos, São Paulo, Brazil</p>
+                            <p>Petrobras, Santos, Brazil</p>
                             <ul>
                                 <li>Created dashboards that made data look cool.</li>
                                 <li>Turned raw data into actionable insights, like a data wizard.</li>
@@ -59,7 +59,7 @@ const Experience = () => {
                         </div>
                         <div className="timeline-content">
                             <h5>Contract Inspector</h5>
-                            <p>PETROBRAS PETROLEO BRASILEIRO SA, Rio de Janeiro, Brazil</p>
+                            <p>Petrobras, Rio de Janeiro, Brazil</p>
                             <ul>
                                 <li>Inspected projects like Sherlock, but for contracts and compliance.</li>
                                 <li>Ensured all invoices and work reports were accurate and on point.</li>
@@ -80,7 +80,7 @@ const Experience = () => {
                         </div>
                         <div className="timeline-content">
                             <h5>Business Process Analyst</h5>
-                            <p>PETROBRAS PETROLEO BRASILEIRO SA, São Paulo, Brazil</p>
+                            <p>Petrobras, São Paulo, Brazil</p>
                             <ul>
                                 <li>Streamlined processes like a productivity ninja.</li>
                                 <li>Implemented data-driven improvements that made workflows sing.</li>

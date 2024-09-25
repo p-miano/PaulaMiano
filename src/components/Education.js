@@ -25,7 +25,7 @@ const Education = () => {
                             2010-2013
                         </div>
                         <div className="timeline-content">
-                            <h5>Postgraduate Certificate in Strategic Contracting Management</h5>
+                            <h5>GC in Strategic Contracting Management</h5>
                             <p>Federal University of Bahia, Brazil</p>
                         </div>
                     </div>
@@ -35,7 +35,7 @@ const Education = () => {
                             2004-2007
                         </div>
                         <div className="timeline-content">
-                            <h5>Bachelors in Business Administration</h5>
+                            <h5>BAC in Business Administration</h5>
                             <p>State University of São Paulo, Brazil</p>
                         </div>
                     </div>
