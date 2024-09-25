@@ -40,7 +40,15 @@ const projectsData = [
         description: "Web API designed to provide detailed information about cities and their points of interest.",
         githubLink: "https://github.com/p-miano/CityInfoAPI.git",
         deployedLink: null // No deployed link
-    }
+    },
+    {
+        id: 6,
+        title: "UI Showcase App",
+        category: "Mobile",
+        description: "Multi-page Android app showcasing various UI components and layouts, with support for dark mode and multi-language localization.",
+        githubLink: "https://github.com/p-miano/UIShowcaseApp.git",
+        deployedLink: null // No deployed link
+    },
 ];
 
 
