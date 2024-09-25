@@ -220,6 +220,12 @@ section {
   transform: scale(1.05); /* Slight zoom-in on hover */
 }
 
+.row.align-items-stretch {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch; /* Ensures all columns/cards are the same height */
+}
+
 /* Icon Styling */
 .icon {
   position: absolute; /* Icon placed at the top-left of the card */

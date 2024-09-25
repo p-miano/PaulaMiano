@@ -10,7 +10,7 @@ const Skills = () => {
                 <div className="underline"></div>
 
                 {/* Skills Cards */}
-                <div className="row">
+                <div className="row align-items-stretch">
                     {/* Card 1: Programming Languages */}
                     <div className="col-md-6 mb-4">
                         <div className="card h-100 text-center">
@@ -100,16 +100,18 @@ const Skills = () => {
                         </div>
                     </div>
 
-                    {/* Card 6: Version Control */}
+                    {/* Card 6: Mobile Development */}
                     <div className="col-md-6 mb-4">
                         <div className="card h-100 text-center">
                             <div className="card-body">
-                                {/* Icon representing Version Control */}
-                                <FaGithub className="icon mb-3" size={50} />
-                                <h5 className="card-title">Version Control</h5>
+                                {/* Icon representing Mobile Development */}
+                                <FaMobileAlt className="icon mb-3" size={50} />
+                                <h5 className="card-title">Mobile Development</h5>
                                 <p className="skill-text">
-                                    <strong>GitHub</strong><br />
-                                    <span className="joke-text">– My "Ctrl+Z for life."</span>
+                                    <strong>iOS (Swift, Xcode)</strong><br />
+                                    <span className="joke-text">– Dipped my toes in the Apple pool, and it’s refreshing.</span><br />
+                                    <strong>Android (Java, Android Studio)</strong><br />
+                                    <span className="joke-text">– We’ve had some meaningful conversations in code.</span>
                                 </p>
                             </div>
                         </div>
@@ -130,22 +132,21 @@ const Skills = () => {
                         </div>
                     </div>
 
-                    {/* Card 8: Mobile Development */}
+                    {/* Card 8: Version Control */}
                     <div className="col-md-6 mb-4">
                         <div className="card h-100 text-center">
                             <div className="card-body">
-                                {/* Icon representing Mobile Development */}
-                                <FaMobileAlt className="icon mb-3" size={50} />
-                                <h5 className="card-title">Mobile Development</h5>
+                                {/* Icon representing Version Control */}
+                                <FaGithub className="icon mb-3" size={50} />
+                                <h5 className="card-title">Version Control</h5>
                                 <p className="skill-text">
-                                    <strong>iOS (Swift, Xcode)</strong><br />
-                                    <span className="joke-text">– Dipped my toes in the Apple pool, and it’s refreshing.</span><br />
-                                    <strong>Android (Java, Android Studio)</strong><br />
-                                    <span className="joke-text">– We’ve had some meaningful conversations in code.</span>
+                                    <strong>GitHub</strong><br />
+                                    <span className="joke-text">– My "Ctrl+Z for life."</span>
                                 </p>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
