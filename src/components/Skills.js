@@ -17,7 +17,7 @@ const Skills = () => {
                             <div className="card-body">
                                 {/* Icon representing Programming Languages */}
                                 <FaCode className="icon mb-3" size={50} />
-                                <h5 className="card-title">Programming Languages</h5>
+                                <h5 className="card-title">Languages</h5>
                                 <p className="skill-text">
                                     <strong>C#, Java</strong><br />
                                     <span className="joke-text">– My battle-hardened warriors, always by my side in the toughest coding quests.</span><br />
@@ -36,14 +36,14 @@ const Skills = () => {
                             <div className="card-body">
                                 {/* Icon representing Frameworks */}
                                 <FaCogs className="icon mb-3" size={50} />
-                                <h5 className="card-title">Frameworks</h5>
+                                <h5 className="card-title">Frameworks and Libraries</h5>
                                 <p className="skill-text">
-                                    <strong>ASP.Net Core MVC, React</strong><br />
+                                    <strong>ASP.Net Core, React</strong><br />
                                     <span className="joke-text">– My ride-or-die frameworks, making me look good.</span><br />
                                     <strong>Bootstrap</strong><br />
                                     <span className="joke-text">– Fashion for websites. I keep things slick.</span><br />
-                                    <strong>Razor Pages</strong><br />
-                                    <span className="joke-text">– Like catching up with an old friend.</span>
+                                    <strong>Razor Pages, Blazor</strong><br />
+                                    <span className="joke-text">–  We’re getting acquainted, but it’s too early to tell if we’ll become friends.</span>
                                 </p>
                             </div>
                         </div>
@@ -55,9 +55,9 @@ const Skills = () => {
                             <div className="card-body">
                                 {/* Icon representing ORM */}
                                 <FaDatabase className="icon mb-3" size={50} />
-                                <h5 className="card-title">ORM (Object Relational Mapper)</h5>
+                                <h5 className="card-title">Object Relational Mappers</h5>
                                 <p className="skill-text">
-                                    <strong>Entity Framework, ADO.NET</strong><br />
+                                    <strong>ADO.NET, Entity Framework, EF Core</strong><br />
                                     <span className="joke-text">– Besties.</span><br />
                                     <strong>Dapper</strong><br />
                                     <span className="joke-text">– Fast, efficient, and occasionally we grab coffee.</span>
@@ -74,7 +74,7 @@ const Skills = () => {
                                 <FaDatabase className="icon mb-3" size={50} />
                                 <h5 className="card-title">Databases</h5>
                                 <p className="skill-text">
-                                    <strong>SQL Server</strong><br />
+                                    <strong>SQL Server, SQLite</strong><br />
                                     <span className="joke-text">– My go-to, like a home-cooked meal.</span><br />
                                     <strong>MySQL, Oracle DB, MongoDB</strong><br />
                                     <span className="joke-text">– We’ve had some dates, not serious but I know enough.</span>
@@ -91,7 +91,7 @@ const Skills = () => {
                                 <FaCloud className="icon mb-3" size={50} />
                                 <h5 className="card-title">Cloud Services</h5>
                                 <p className="skill-text">
-                                    <strong>Microsoft Azure</strong><br />
+                                    <strong>Microsoft Azure, Firebase</strong><br />
                                     <span className="joke-text">– Figuring out the dance in the cloud, but I’ve got the basics down.</span><br />
                                     <strong>Azure App Services</strong><br />
                                     <span className="joke-text">– I can deploy apps without breaking too many things.</span>

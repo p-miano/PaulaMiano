@@ -10,6 +10,29 @@ const Experience = () => {
 
                 {/* Experience Timeline */}
                 <div className="timeline">
+                    
+                <div className="timeline-item">
+                        <div className="timeline-date">
+                            Sep 2024 - Current
+                        </div>
+                        <div className="timeline-content">
+                            <h5>Web Development Intern</h5>
+                            <p>Syndicate Vision, Montreal, Canada</p>
+                            <ul>
+                                <li>Crafted WordPress plugins like a wizard conjuring spells—client needs met, no potions required.</li>
+                                <li>Teamed up to integrate APIs like connecting Lego blocks—built solid, functional structures.</li>
+                                <li>Squashed plugin bugs and optimized code like a digital exterminator—no bug stood a chance.</li>
+                            </ul>
+                            <div className="skills">
+                                <span className="skill-badge">WordPress</span>
+                                <span className="skill-badge">API Integration</span>
+                                <span className="skill-badge">Debugging</span>
+                                <span className="skill-badge">Collaboration</span>
+                                <span className="skill-badge">Code Review</span>
+                            </div>
+                        </div>
+                    </div>
+
                     <div className="timeline-item">
                         <div className="timeline-date">
                             Oct 2021 - Apr 2023
@@ -48,7 +71,7 @@ const Experience = () => {
                                 <span className="skill-badge">SQL</span>
                                 <span className="skill-badge">ETL</span>
                                 <span className="skill-badge">Analytical Thinking</span>
-                                <span className="skill-badge">Communication and Collaboration</span>
+                                <span className="skill-badge">Communication</span>
                             </div>
                         </div>
                     </div>
