@@ -17,7 +17,7 @@ const Experience = () => {
                         </div>
                         <div className="timeline-content">
                             <h5>Web Development Intern</h5>
-                            <p>Syndicate Vision, Montreal, Canada</p>
+                            <p>Syndicate, Montreal, Canada</p>
                             <ul>
                                 <li>Crafted WordPress plugins like a wizard conjuring spells—client needs met, no potions required.</li>
                                 <li>Teamed up to integrate APIs like connecting Lego blocks—built solid, functional structures.</li>

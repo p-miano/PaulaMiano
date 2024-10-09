@@ -45,6 +45,9 @@ function Navbar() {
                             <button className="nav-link btn btn-link" onClick={() => scrollToSection('portfolio')}>Portfolio</button>
                         </li>
                         <li className="nav-item">
+                            <button className="nav-link btn btn-link" onClick={() => scrollToSection('github-stats')}>GitHub Languages</button>
+                        </li>
+                        <li className="nav-item">
                             <button className="nav-link btn btn-link" onClick={() => scrollToSection('work-experience')}>Experience</button>
                         </li>
                         <li className="nav-item">

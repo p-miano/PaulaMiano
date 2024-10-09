@@ -18,8 +18,8 @@ function App() {
       <Home />
       <About />
       <Skills />
-      <GithubStats />
       <Portfolio />
+      <GithubStats />
       <Experience />
       <Education />
       <Contact />
