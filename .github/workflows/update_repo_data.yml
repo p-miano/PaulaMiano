@@ -6,7 +6,7 @@ on:
   workflow_dispatch: # Allows manual triggering
 
 jobs:
-  fetch-and-save-data:
+  fetch-and-save-languages:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,55 +20,47 @@ jobs:
         with:
           node-version: '16'
 
-      # Step 3: Fetch the repository data from GitHub API and extract languages
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Fetch repository languages data from GitHub API
       - name: Fetch Repo Languages Data
         env:
           STATS_API_TOKEN: ${{ secrets.STATS_API_TOKEN }}
         run: |
           echo "Fetching repository languages data..."
-          REPOS=$(curl -s -H "Authorization: token $STATS_API_TOKEN" https://api.github.com/user/repos?type=all&per_page=100)
-
-          # Initialize an empty JSON array
-          echo "[]" > repo_data.json
-
-          # Iterate over each repository and fetch languages
-          echo "${REPOS}" | jq -c '.[]' | while read -r row; do
-            REPO_NAME=$(echo "${row}" | jq -r '.name')
-            REPO_OWNER=$(echo "${row}" | jq -r '.owner.login')
-            LANGUAGES=$(curl -s -H "Authorization: token $STATS_API_TOKEN" "https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/languages")
-
-            # Check if the languages request succeeded
-            if echo "${LANGUAGES}" | jq -e 'has("message")' > /dev/null; then
-              echo "Error fetching languages for ${REPO_NAME}: ${LANGUAGES}"
-              continue
-            fi
-
-            # Merge the language data into the final JSON file
-            jq --argjson languages "${LANGUAGES}" --arg repo "${REPO_NAME}" '. += [{"repo": $repo, "languages": $languages}]' repo_data.json > tmp.json && mv tmp.json repo_data.json
+          REPOS=$(curl -s -H "Authorization: token $STATS_API_TOKEN" https://api.github.com/user/repos?type=all&per_page=100 | jq -r '.[].name')
+          
+          echo "[" > repo_data.json
+          for REPO in $REPOS; do
+            LANGUAGES=$(curl -s -H "Authorization: token $STATS_API_TOKEN" "https://api.github.com/repos/${{ github.repository_owner }}/$REPO/languages")
+            echo "{ \"repo\": \"$REPO\", \"languages\": $LANGUAGES }," >> repo_data.json
           done
+          sed -i '$ s/,$//' repo_data.json # Remove the trailing comma from the last object
+          echo "]" >> repo_data.json
 
           # Output the content for verification
           echo "Fetched languages saved to JSON file:"
           cat repo_data.json
 
-
-      # Step 4: Remove the untracked JSON file if it exists
+      # Step 5: Remove untracked JSON file if it exists to avoid conflicts
       - name: Remove Untracked JSON File
         run: |
           if [ -f repo_data.json ]; then
-            echo "Removing existing repo_data.json to avoid conflicts when switching branches."
             rm repo_data.json
           fi
 
-      # Step 5: Checkout gh-pages branch
+      # Step 6: Checkout gh-pages branch
       - name: Checkout gh-pages Branch
         run: |
           git fetch
           git checkout gh-pages
 
-      # Step 6: Commit the JSON file to gh-pages branch
+      # Step 7: Commit JSON file to gh-pages branch
       - name: Commit JSON File
         run: |
+          mv repo_data.json ./ # Move the file to the root if needed
           git add repo_data.json
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
