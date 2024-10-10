@@ -34,7 +34,14 @@ jobs:
           # Iterate over each repository and fetch languages
           echo "${REPOS}" | jq -c '.[]' | while read -r row; do
             REPO_NAME=$(echo "${row}" | jq -r '.name')
-            LANGUAGES=$(curl -s -H "Authorization: token $STATS_API_TOKEN" "https://api.github.com/repos/${{ github.repository_owner }}/${REPO_NAME}/languages")
+            REPO_OWNER=$(echo "${row}" | jq -r '.owner.login')
+            LANGUAGES=$(curl -s -H "Authorization: token $STATS_API_TOKEN" "https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/languages")
+
+            # Check if the languages request succeeded
+            if echo "${LANGUAGES}" | jq -e 'has("message")' > /dev/null; then
+              echo "Error fetching languages for ${REPO_NAME}: ${LANGUAGES}"
+              continue
+            fi
 
             # Merge the language data into the final JSON file
             jq --argjson languages "${LANGUAGES}" --arg repo "${REPO_NAME}" '. += [{"repo": $repo, "languages": $languages}]' repo_data.json > tmp.json && mv tmp.json repo_data.json
@@ -43,6 +50,7 @@ jobs:
           # Output the content for verification
           echo "Fetched languages saved to JSON file:"
           cat repo_data.json
+
 
       # Step 4: Remove the untracked JSON file if it exists
       - name: Remove Untracked JSON File
