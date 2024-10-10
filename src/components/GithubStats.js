@@ -13,46 +13,24 @@ const GithubStats = () => {
     const [error, setError] = useState(null);
 
     const fetchLanguages = async () => {
-        const perPage = 100;
-
         try {
-            console.log('Fetching with Token:', process.env.REACT_APP_STATS_API_TOKEN || 'Token is undefined'); // Debug log
             setLoading(true);
 
-            // Use the full GitHub API URL
-            const response = await fetch(`https://api.github.com/user/repos?type=all&per_page=${perPage}`, {
-                headers: {
-                    Authorization: `Bearer ${process.env.REACT_APP_STATS_API_TOKEN}`
-                }
-            });
-
+            // Load repository data from repo_data.json
+            const response = await fetch('/repo_data.json');
             if (!response.ok) {
-                throw new Error(`Failed to fetch repositories: ${response.statusText}`);
+                throw new Error(`Failed to load repository data: ${response.statusText}`);
             }
 
             const allRepos = await response.json();
-            console.log('Total Repositories Fetched:', allRepos.length); // Debug log
+            console.log('Total Repositories Fetched from repo_data.json:', allRepos.length); // Debug log
+
+            // Accumulate language data
             const languagesData = {};
-
-            // Fetch languages for each repo using the full API URL
             for (const repo of allRepos) {
-                console.log('Fetching languages for repo:', repo.name); // Debug log
-                const relativeLanguagesUrl = repo.languages_url.replace('https://api.github.com', '');
-                const languagesResponse = await fetch(`https://api.github.com${relativeLanguagesUrl}`, {
-                    headers: {
-                        Authorization: `Bearer ${process.env.REACT_APP_STATS_API_TOKEN}`
-                    }
-                });
-
-                if (languagesResponse.ok) {
-                    const repoLanguages = await languagesResponse.json();
-                    console.log(`Languages for repo ${repo.name}:`, repoLanguages); // Debug log
-
-                    for (const [language, count] of Object.entries(repoLanguages)) {
-                        languagesData[language] = (languagesData[language] || 0) + count;
-                    }
-                } else {
-                    console.error(`Failed to fetch languages for repo: ${repo.name}`);
+                if (repo.language) {
+                    // GitHub API provides a "language" field in repository data
+                    languagesData[repo.language] = (languagesData[repo.language] || 0) + 1;
                 }
             }
 
@@ -60,14 +38,10 @@ const GithubStats = () => {
             setLoading(false);
         } catch (err) {
             console.error('Error fetching languages or repositories:', err);
-            setError(err.message); // Set the error message so it can be displayed in the UI
+            setError(err.message); // Set the error message to display in UI
             setLoading(false);
         }
     };
-
-    useEffect(() => {
-        console.log('Environment Token (GithubStats Component):', process.env.REACT_APP_STATS_API_TOKEN || 'Token is undefined'); // Debug log
-    }, []);    
 
     useEffect(() => {
         fetchLanguages();
@@ -138,7 +112,7 @@ const GithubStats = () => {
             },
             datalabels: {
                 display: true,
-                color: '#474747', 
+                color: '#474747',
                 font: {
                     size: 14,
                     weight: 'bold'
@@ -151,7 +125,7 @@ const GithubStats = () => {
                         return ''; // Do not display labels for percentages <= 3%
                     }
                 }
-            }         
+            }
         },
         cutout: '40%', // Makes the doughnut smaller by cutting out more of the center
     };
