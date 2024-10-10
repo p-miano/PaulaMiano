@@ -2,7 +2,7 @@ name: Update GitHub Repo Data
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs every day at midnight (can be adjusted)
+    - cron: "0 0 * * *" # Runs every day at midnight (can be adjusted)
   workflow_dispatch: # Allows manual triggering
 
 jobs:
@@ -18,35 +18,35 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: "16"
 
       # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Step 4: Fetch the repository data from GitHub API
+      # Step 4: Check GitHub API Rate Limit (Optional Debug Step)
+      - name: Check GitHub API Rate Limit
+        env:
+          STATS_API_TOKEN: ${{ secrets.STATS_API_TOKEN }}
+        run: |
+          curl -H "Authorization: token $STATS_API_TOKEN" https://api.github.com/rate_limit
+
+      # Step 5: Fetch the repository data from GitHub API
       - name: Fetch Repo Data
         env:
           STATS_API_TOKEN: ${{ secrets.STATS_API_TOKEN }}
         run: |
-          echo "Token starts with: ${STATS_API_TOKEN:0:4}****" # Debugging the token
-          curl -H "Authorization: token $STATS_API_TOKEN" \
-          https://api.github.com/user/repos?type=all&per_page=100 \
-          -o repo_data.json
+          echo "Fetching repository data..."
+          curl -H "Authorization: token $STATS_API_TOKEN" https://api.github.com/user/repos?type=all&per_page=100 > repo_data.json
 
-          echo "Contents of repo_data.json:"
+          echo "Fetched data:"
           cat repo_data.json # Add this line to print the content of the JSON file for debugging purposes.
 
-      # Step 5: Commit and push the repo data JSON file back to the repository
+      # Step 6: Commit and push the repo data JSON file back to the repository
       - name: Commit and Push JSON File
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          # Only commit if there are changes
-          if [ -n "$(git status --porcelain)" ]; then
-            git add repo_data.json
-            git commit -m "Update repository data [skip ci]"
-            git push
-          else
-            echo "No changes to commit"
+          git add repo_data.json
+          git commit -m "Update repository data [skip ci]" || echo "No changes to commit"
+          git push
