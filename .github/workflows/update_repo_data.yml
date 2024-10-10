@@ -2,7 +2,7 @@ name: Update GitHub Repo Data
 
 on:
   schedule:
-    - cron: "0 0 * * *" # Runs every day at midnight (can be adjusted)
+    - cron: '0 0 * * *' # Runs every day at midnight (can be adjusted)
   workflow_dispatch: # Allows manual triggering
 
 jobs:
@@ -18,31 +18,34 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: '16'
 
       # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
 
-      # Step 4: Check GitHub API Rate Limit (Optional Debug Step)
-      - name: Check GitHub API Rate Limit
-        env:
-          STATS_API_TOKEN: ${{ secrets.STATS_API_TOKEN }}
-        run: |
-          curl -H "Authorization: token $STATS_API_TOKEN" https://api.github.com/rate_limit
-
-      # Step 5: Fetch the repository data from GitHub API
+      # Step 4: Fetch the repository data from GitHub API
       - name: Fetch Repo Data
         env:
           STATS_API_TOKEN: ${{ secrets.STATS_API_TOKEN }}
         run: |
           echo "Fetching repository data..."
-          curl -H "Authorization: token $STATS_API_TOKEN" https://api.github.com/user/repos?type=all&per_page=100 > repo_data.json
+          RESPONSE=$(curl -s -H "Authorization: token $STATS_API_TOKEN" \
+            https://api.github.com/user/repos?type=all&per_page=100)
 
-          echo "Fetched data:"
-          cat repo_data.json # Add this line to print the content of the JSON file for debugging purposes.
+          # Verify if RESPONSE contains data and write it to the file
+          if [ -n "$RESPONSE" ]; then
+            echo "$RESPONSE" | jq '.' > repo_data.json
+          else
+            echo "No data fetched. RESPONSE is empty."
+            exit 1
+          fi
 
-      # Step 6: Commit and push the repo data JSON file back to the repository
+          # Output the content for verification
+          echo "Fetched data saved to JSON file:"
+          cat repo_data.json
+
+      # Step 5: Commit and push the repo data JSON file back to the repository
       - name: Commit and Push JSON File
         run: |
           git config user.name "github-actions[bot]"
