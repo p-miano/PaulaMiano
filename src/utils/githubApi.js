@@ -3,8 +3,8 @@
 // Read repo_data.json instead of using the GitHub API directly
 export const fetchGithubRepos = async () => {
     try {
-        // Load the JSON file from your GitHub repository
-        const response = await fetch('/repo_data.json');
+        // Update the URL to point to the correct path on GitHub Pages
+        const response = await fetch('/PaulaMiano/repo_data.json');
 
         if (!response.ok) {
             throw new Error(`Error fetching repo data: ${response.statusText}`);
