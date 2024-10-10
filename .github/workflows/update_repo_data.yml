@@ -35,7 +35,7 @@ jobs:
 
           # Verify if RESPONSE contains data and write it to the file
           if [ -n "$RESPONSE" ]; then
-            echo "$RESPONSE" | jq '.' > repo_data.json
+            echo "$RESPONSE" | jq '.' > public/repo_data.json
           else
             echo "No data fetched. RESPONSE is empty."
             exit 1
@@ -43,13 +43,13 @@ jobs:
 
           # Output the content for verification
           echo "Fetched data saved to JSON file:"
-          cat repo_data.json
+          cat public/repo_data.json
 
       # Step 5: Commit and push the repo data JSON file back to the repository
       - name: Commit and Push JSON File
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add repo_data.json
+          git add public/repo_data.json
           git commit -m "Update repository data [skip ci]" || echo "No changes to commit"
           git push
