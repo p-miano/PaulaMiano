@@ -9,17 +9,17 @@ export const fetchGithubRepos = async () => {
 
     try {
         while (true) {
-            // console.log(`Fetching page ${page} with ${perPage} repos per page.`); // Commented out debug log
+            console.log(`Fetching page ${page} with ${perPage} repos per page.`); // Debug log
 
-            // Fetch using relative URL to utilize the proxy
-            const response = await fetch(`/user/repos?type=all&per_page=${perPage}&page=${page}`, {
+            // Use the full GitHub API URL
+            const response = await fetch(`${GITHUB_API_URL}/user/repos?type=all&per_page=${perPage}&page=${page}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     'Cache-Control': 'no-cache',
                 },
             });
 
-            // console.log('Response Status:', response.status); // Commented out debug log
+            console.log('Response Status:', response.status); // Debug log
 
             if (response.status === 401) {
                 console.error('Unauthorized: Check if token has correct permissions or has expired.');
@@ -30,7 +30,7 @@ export const fetchGithubRepos = async () => {
             }
 
             const repos = await response.json();
-            // console.log(`Fetched ${repos.length} repositories from page ${page}.`); // Commented out debug log
+            console.log(`Fetched ${repos.length} repositories from page ${page}.`); // Debug log
 
             if (repos.length === 0) {
                 break; // No more repositories left to fetch
@@ -44,7 +44,7 @@ export const fetchGithubRepos = async () => {
             }
         }
 
-        // console.log('Total Repositories Fetched:', allRepos.length); // Commented out debug log
+        console.log('Total Repositories Fetched:', allRepos.length); // Debug log
         return allRepos;
     } catch (error) {
         console.error('Error fetching repositories:', error);
@@ -56,7 +56,8 @@ export const fetchGithubRepos = async () => {
 export const fetchLanguagesForRepo = async (repoUrl) => {
     try {
         const relativeRepoUrl = repoUrl.replace(GITHUB_API_URL, '');
-        const response = await fetch(relativeRepoUrl, {
+        console.log('Fetching languages for:', repoUrl); // Debug log
+        const response = await fetch(`${GITHUB_API_URL}${relativeRepoUrl}`, {
             headers: {
                 Authorization: `Bearer ${process.env.REACT_APP_STATS_API_TOKEN}`,
             },
@@ -68,6 +69,7 @@ export const fetchLanguagesForRepo = async (repoUrl) => {
         }
 
         const languages = await response.json();
+        console.log('Fetched languages:', languages); // Debug log
         return languages;
     } catch (error) {
         console.error('Error fetching languages:', error);
