@@ -10,14 +10,24 @@ export const fetchGithubRepos = async () => {
             throw new Error(`Error fetching repo data: ${response.statusText}`);
         }
 
-        const allRepos = await response.json();
-        console.log('Fetched repositories from repo_data.json:', allRepos); // Debug log
-        return allRepos;
+        const repoLanguages = await response.json();
+        console.log('Fetched repository languages from repo_data.json:', repoLanguages); // Debug log
+
+        // Accumulate language data
+        const languagesData = {};
+        for (const repo of repoLanguages) {
+            for (const [language, count] of Object.entries(repo.languages)) {
+                languagesData[language] = (languagesData[language] || 0) + count;
+            }
+        }
+
+        return languagesData;
     } catch (error) {
         console.error('Error loading repository data:', error);
         return null;
     }
 };
+
 
 /* // Fetch languages for each repository
 export const fetchLanguagesForRepo = async (repoUrl) => {
