@@ -24,23 +24,47 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      # Step 4: Fetch the repository data from GitHub API
-      - name: Fetch Repo Data
+      # Step 4: Debug Token and Rate Limit Information
+      - name: Check GitHub API Rate Limit
         env:
           STATS_API_TOKEN: ${{ secrets.STATS_API_TOKEN }}
         run: |
           echo "Token starts with: ${STATS_API_TOKEN:0:4}****" # Debugging the token
-          curl -H "Authorization: token $STATS_API_TOKEN" \
-          https://api.github.com/user/repos?type=all&per_page=100 \
-          > repo_data.json
+          curl -H "Authorization: token $STATS_API_TOKEN" https://api.github.com/rate_limit
 
-          cat repo_data.json # Add this line to print the content of the JSON file for debugging purposes.
+      # Step 5: Fetch the repository data from GitHub API
+      - name: Fetch Repo Data
+        env:
+          STATS_API_TOKEN: ${{ secrets.STATS_API_TOKEN }}
+        run: |
+          echo "Fetching repository data..."
+          response=$(curl -s -w "%{http_code}" -H "Authorization: token $STATS_API_TOKEN" \
+            https://api.github.com/user/repos?type=all&per_page=100 \
+            -o repo_data.json)
 
-      # Step 5: Commit and push the repo data JSON file back to the repository
+          # Extract HTTP status code from the response
+          status_code=$(tail -c 3 <<< "$response")
+
+          if [ "$status_code" -ne 200 ]; then
+            echo "Failed to fetch data, HTTP status code: $status_code"
+            cat repo_data.json # Print the error message from GitHub
+            exit 1
+          fi
+
+          # Print the contents of the JSON file to verify it contains data
+          echo "Contents of repo_data.json:"
+          cat repo_data.json
+
+      # Step 6: Commit and push the repo data JSON file back to the repository
       - name: Commit and Push JSON File
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add repo_data.json
-          git commit -m "Update repository data [skip ci]"
-          git push
+
+          # Only commit if there are changes
+          if [ -n "$(git status --porcelain)" ]; then
+            git add repo_data.json
+            git commit -m "Update repository data [skip ci]"
+            git push
+          else
+            echo "No changes to commit"
