@@ -2,7 +2,7 @@ name: Update GitHub Repo Languages Data
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs every day at midnight
+    - cron: "0 0 * * *" # Runs every day at midnight
   workflow_dispatch: # Allows manual triggering
 
 jobs:
@@ -18,7 +18,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: "16"
 
       # Step 3: Install dependencies
       - name: Install dependencies
@@ -31,11 +31,13 @@ jobs:
         run: |
           echo "Fetching repository languages data..."
           REPOS=$(curl -s -H "Authorization: token $STATS_API_TOKEN" https://api.github.com/user/repos?type=all&per_page=100 | jq -r '.[].name')
-          
+
           echo "[" > repo_data.json
           for REPO in $REPOS; do
             LANGUAGES=$(curl -s -H "Authorization: token $STATS_API_TOKEN" "https://api.github.com/repos/${{ github.repository_owner }}/$REPO/languages")
-            echo "{ \"repo\": \"$REPO\", \"languages\": $LANGUAGES }," >> repo_data.json
+            if [ "$LANGUAGES" != "{}" ]; then
+              echo "{ \"repo\": \"$REPO\", \"languages\": $LANGUAGES }," >> repo_data.json
+            fi
           done
           sed -i '$ s/,$//' repo_data.json # Remove the trailing comma from the last object
           echo "]" >> repo_data.json
