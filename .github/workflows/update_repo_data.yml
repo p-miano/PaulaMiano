@@ -44,13 +44,20 @@ jobs:
           echo "Fetched languages saved to JSON file:"
           cat repo_data.json
 
-      # Step 4: Checkout gh-pages branch
+      # Step 4: Remove the untracked JSON file if it exists
+      - name: Remove Untracked JSON File
+        if: exists(repo_data.json)
+        run: |
+          echo "Removing existing repo_data.json to avoid conflicts when switching branches."
+          rm repo_data.json
+
+      # Step 5: Checkout gh-pages branch
       - name: Checkout gh-pages Branch
         run: |
           git fetch
           git checkout gh-pages
 
-      # Step 5: Commit the JSON file to gh-pages branch
+      # Step 6: Commit the JSON file to gh-pages branch
       - name: Commit JSON File
         run: |
           git add repo_data.json
