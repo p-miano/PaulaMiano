@@ -37,14 +37,15 @@ jobs:
             REPO_OWNER=$(echo "${row}" | jq -r '.owner.login')
             LANGUAGES=$(curl -s -H "Authorization: token $STATS_API_TOKEN" "https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/languages")
 
-            # Check if the languages request succeeded
+            # Check if the languages request succeeded and if there are languages in the response
             if [[ "${LANGUAGES}" == "{}" || -z "${LANGUAGES}" ]]; then
               echo "No languages found or error fetching languages for ${REPO_NAME}. Skipping..."
               continue
             fi
 
-            # Merge the language data into the final JSON file
-            jq --argjson languages "${LANGUAGES}" --arg repo "${REPO_NAME}" '. += [{"repo": $repo, "languages": $languages}]' repo_data.json > tmp.json && mv tmp.json repo_data.json
+            # Only append languages to the JSON file
+            jq --arg repo "${REPO_NAME}" --argjson languages "${LANGUAGES}" \
+              '. += [{"repo": $repo, "languages": $languages}]' repo_data.json > tmp.json && mv tmp.json repo_data.json
           done
 
           # Output the content for verification
