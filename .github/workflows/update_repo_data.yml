@@ -45,7 +45,7 @@ jobs:
           echo "Fetched data saved to JSON file:"
           cat repo_data.json
 
-      # Step 5: Remove the untracked JSON file if it exists
+      # Step 5: Remove the untracked JSON file if it exists (to avoid conflicts)
       - name: Remove Untracked JSON File
         run: |
           if [ -f repo_data.json ]; then
@@ -58,76 +58,23 @@ jobs:
           git fetch
           git checkout gh-pages
 
-      # Step 7: Move JSON file to the root and commit
-      - name: Move JSON File and Commit
-        run: |
-          mv repo_data.json ./
-          git add repo_data.json
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git commit -m "Update repository data [skip ci]" || echo "No changes to commit"
-          git push origin gh-pages
-name: Update GitHub Repo Data
-
-on:
-  schedule:
-    - cron: '0 0 * * *' # Runs every day at midnight
-  workflow_dispatch: # Allows manual triggering
-
-jobs:
-  fetch-and-save-data:
-    runs-on: ubuntu-latest
-
-    steps:
-      # Step 1: Checkout the repository
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
-      # Step 2: Set up Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
-      # Step 3: Install dependencies
-      - name: Install dependencies
-        run: npm install
-
-      # Step 4: Fetch the repository data from GitHub API
-      - name: Fetch Repo Data
+      # Step 7: Fetch the data again after switching branches and move it to the correct location
+      - name: Fetch Repo Data Again
         env:
           STATS_API_TOKEN: ${{ secrets.STATS_API_TOKEN }}
         run: |
-          echo "Fetching repository data..."
+          echo "Fetching repository data again for gh-pages branch..."
           RESPONSE=$(curl -s -H "Authorization: token $STATS_API_TOKEN" \
             https://api.github.com/user/repos?type=all&per_page=100)
 
-          # Verify if RESPONSE contains data and write it to the file
           if [ -n "$RESPONSE" ]; then
             echo "$RESPONSE" | jq '.' > repo_data.json
           else
-            echo "No data fetched. RESPONSE is empty."
+            echo "No data fetched on gh-pages. RESPONSE is empty."
             exit 1
           fi
 
-          # Output the content for verification
-          echo "Fetched data saved to JSON file:"
-          cat repo_data.json
-
-      # Step 5: Remove the untracked JSON file if it exists
-      - name: Remove Untracked JSON File
-        run: |
-          if [ -f repo_data.json ]; then
-            rm repo_data.json
-          fi
-
-      # Step 6: Checkout gh-pages branch
-      - name: Checkout gh-pages Branch
-        run: |
-          git fetch
-          git checkout gh-pages
-
-      # Step 7: Commit the JSON file to gh-pages branch
+      # Step 8: Commit the JSON file to gh-pages branch
       - name: Commit JSON File
         run: |
           git add repo_data.json
