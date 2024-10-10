@@ -58,11 +58,11 @@ jobs:
           git fetch
           git checkout gh-pages
 
-      # Step 7: Move the repo_data.json file to the public folder and commit
+      # Step 7: Move JSON file to the root and commit
       - name: Move JSON File and Commit
         run: |
-          mv repo_data.json public/
-          git add public/repo_data.json
+          mv repo_data.json ./
+          git add repo_data.json
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "Update repository data [skip ci]" || echo "No changes to commit"
