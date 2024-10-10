@@ -20,9 +20,3 @@ If you'd like to contribute or explore the code, check out the GitHub repository
 
 For more detailed setup instructions, refer to the [Documentation](./Documentation.md).
 
-## Contact
-
-Feel free to reach out via:
-
-- **Email:** [paulamiano@gmail.com](mailto:paulamiano@gmail.com)
-- **LinkedIn:** [Paula Miano](https://www.linkedin.com/in/paula-miano)
