@@ -27,11 +27,14 @@ jobs:
       # Step 4: Fetch the repository data from GitHub API
       - name: Fetch Repo Data
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          STATS_API_TOKEN: ${{ secrets.STATS_API_TOKEN }}
         run: |
-          curl -H "Authorization: token $GITHUB_TOKEN" \
+          echo "Token starts with: ${STATS_API_TOKEN:0:4}****" # Debugging the token
+          curl -H "Authorization: token $STATS_API_TOKEN" \
           https://api.github.com/user/repos?type=all&per_page=100 \
           > repo_data.json
+
+          cat repo_data.json # Add this line to print the content of the JSON file for debugging purposes.
 
       # Step 5: Commit and push the repo data JSON file back to the repository
       - name: Commit and Push JSON File
