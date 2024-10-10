@@ -52,20 +52,10 @@ jobs:
           echo "Fetched languages saved to JSON file:"
           cat repo_data.json
 
-      # Step 4: Remove the existing JSON file in gh-pages branch to avoid conflicts
-      - name: Remove Existing JSON File
+      # Step 4: Move JSON file to a temporary location to avoid conflicts
+      - name: Move JSON File to Temp Location
         run: |
-          if git ls-remote --exit-code --heads origin gh-pages; then
-            git fetch origin gh-pages
-            git checkout gh-pages
-            if [ -f repo_data.json ]; then
-              echo "Removing existing repo_data.json from gh-pages branch to ensure new file is saved."
-              rm repo_data.json
-              git add repo_data.json
-              git commit -m "Remove old repo_data.json to prepare for update [skip ci]" || echo "No changes to commit"
-              git push origin gh-pages
-            fi
-          fi
+          mv repo_data.json /tmp/repo_data.json
 
       # Step 5: Checkout gh-pages branch
       - name: Checkout gh-pages Branch
@@ -73,10 +63,10 @@ jobs:
           git fetch
           git checkout gh-pages
 
-      # Step 6: Move JSON file to gh-pages branch
-      - name: Move JSON File
+      # Step 6: Move JSON file back to the repository
+      - name: Move JSON File Back
         run: |
-          mv ../repo_data.json ./
+          mv /tmp/repo_data.json repo_data.json
 
       # Step 7: Commit the JSON file to gh-pages branch
       - name: Commit JSON File
