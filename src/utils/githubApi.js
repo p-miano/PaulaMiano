@@ -4,7 +4,7 @@
 export const fetchGithubRepos = async () => {
     try {
         // Update the URL to point to the correct path on GitHub Pages
-        const response = await fetch('/PaulaMiano/repo_data.json');
+        const response = await fetch('https://p-miano.github.io/PaulaMiano/repo_data.json');
 
         if (!response.ok) {
             throw new Error(`Error fetching repo data: ${response.statusText}`);
