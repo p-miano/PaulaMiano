@@ -28,10 +28,22 @@ jobs:
           echo "Fetching repository languages data..."
           REPOS=$(curl -s -H "Authorization: token $STATS_API_TOKEN" https://api.github.com/user/repos?type=all&per_page=100)
 
+          # Log the fetched data for verification
+          echo "Fetched repository data for verification:"
+          echo "${REPOS}" | jq '.'
+
+          # This is where the fetched data stops and we start dealing with it.
+          # The fetching and logging are working well.
+
+      # Step 4: Write the JSON data (this is the step that requires improvements)
+      - name: Write JSON File
+        run: |
+          echo "Writing fetched data to JSON file..."
+          
           # Initialize an empty JSON array
           echo "[]" > repo_data.json
 
-          # Iterate over each repository and fetch languages
+          # Iterate over each repository and fetch languages, then write to JSON
           echo "${REPOS}" | jq -c '.[]' | while read -r row; do
             REPO_NAME=$(echo "${row}" | jq -r '.name')
             REPO_OWNER=$(echo "${row}" | jq -r '.owner.login')
@@ -52,23 +64,19 @@ jobs:
           echo "Fetched languages saved to JSON file:"
           cat repo_data.json
 
-      # Step 4: Remove the untracked JSON file if it exists
-      - name: Remove Existing JSON File
-        if: exists(repo_data.json)
+      # Step 5: Remove the untracked JSON file if it exists
+      - name: Remove Untracked JSON File
         run: |
-          echo "Removing existing repo_data.json to avoid conflicts when switching branches."
-          rm repo_data.json
+          if [ -f repo_data.json ]; then
+            echo "Removing existing repo_data.json to avoid conflicts when switching branches."
+            rm repo_data.json
+          fi
 
-      # Step 5: Checkout gh-pages branch
+      # Step 6: Checkout gh-pages branch
       - name: Checkout gh-pages Branch
         run: |
           git fetch
           git checkout gh-pages
-
-      # Step 6: Copy the updated JSON file
-      - name: Copy JSON File
-        run: |
-          cp ../repo_data.json .
 
       # Step 7: Commit the JSON file to gh-pages branch
       - name: Commit JSON File
@@ -77,4 +85,4 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "Update repository languages data [skip ci]" || echo "No changes to commit"
-          git push origin gh-pages --force
+          git push origin gh-pages
