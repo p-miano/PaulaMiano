@@ -46,10 +46,11 @@ jobs:
 
       # Step 4: Remove the untracked JSON file if it exists
       - name: Remove Untracked JSON File
-        if: exists(repo_data.json)
         run: |
-          echo "Removing existing repo_data.json to avoid conflicts when switching branches."
-          rm repo_data.json
+          if [ -f repo_data.json ]; then
+            echo "Removing existing repo_data.json to avoid conflicts when switching branches."
+            rm repo_data.json
+          fi
 
       # Step 5: Checkout gh-pages branch
       - name: Checkout gh-pages Branch
