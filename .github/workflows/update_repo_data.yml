@@ -53,12 +53,11 @@ jobs:
           cat repo_data.json
 
       # Step 4: Remove the untracked JSON file if it exists
-      - name: Remove Untracked JSON File
+      - name: Remove Existing JSON File
+        if: exists(repo_data.json)
         run: |
-          if [ -f repo_data.json ]; then
-            echo "Removing existing repo_data.json to avoid conflicts when switching branches."
-            rm repo_data.json
-          fi
+          echo "Removing existing repo_data.json to avoid conflicts when switching branches."
+          rm repo_data.json
 
       # Step 5: Checkout gh-pages branch
       - name: Checkout gh-pages Branch
@@ -66,11 +65,16 @@ jobs:
           git fetch
           git checkout gh-pages
 
-      # Step 6: Commit the JSON file to gh-pages branch
+      # Step 6: Copy the updated JSON file
+      - name: Copy JSON File
+        run: |
+          cp ../repo_data.json .
+
+      # Step 7: Commit the JSON file to gh-pages branch
       - name: Commit JSON File
         run: |
           git add repo_data.json
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git commit -m "Update repository languages data [skip ci]" || echo "No changes to commit"
-          git push origin gh-pages
+          git push origin gh-pages --force
