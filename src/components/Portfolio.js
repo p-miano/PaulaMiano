@@ -53,9 +53,17 @@ const projectsData = [
         id: 7,
         title: "GitHub Proxy Server",
         category: "API",
-        description: " Simple Node.js API server that acts as a proxy for fetching aggregated language data from your GitHub public and private repositories.",
+        description: " Simple Node.js API server that acts as a proxy for fetching aggregated language data from my GitHub public and private repositories.",
         githubLink: "https://github.com/p-miano/github-proxy-server",
         deployedLink: "https://github-proxy-server.onrender.com/github-languages"
+    },
+    {
+        id: 8,
+        title: "Grocery Manager App",
+        category: "Mobile",
+        description: "Android application designed to help users manage their grocery items. Users can add, update, and delete grocery items. Uses Firebase Authentication for user management and SQLite for local data storage.",
+        githubLink: "https://github.com/p-miano/GroceryManager",
+        deployedLink: null // No deployed link
     },
 ];
 
