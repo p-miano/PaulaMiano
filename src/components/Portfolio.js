@@ -49,6 +49,14 @@ const projectsData = [
         githubLink: "https://github.com/p-miano/UIShowcaseApp.git",
         deployedLink: null // No deployed link
     },
+    {
+        id: 7,
+        title: "GitHub Proxy Server",
+        category: "API",
+        description: " Simple Node.js API server that acts as a proxy for fetching aggregated language data from your GitHub public and private repositories.",
+        githubLink: "https://github.com/p-miano/github-proxy-server",
+        deployedLink: "https://github-proxy-server.onrender.com/github-languages"
+    },
 ];
 
 
