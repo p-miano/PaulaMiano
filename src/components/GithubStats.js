@@ -13,60 +13,25 @@ const GithubStats = () => {
     const [error, setError] = useState(null);
 
     const fetchLanguages = async () => {
-        const perPage = 100;
-
         try {
-            // console.log('Fetching with Token:', process.env.REACT_APP_STATS_API_TOKEN || 'Token is undefined'); // DEBUGGING: Check if the token is available
             setLoading(true);
 
-            // Fetch all repositories in a single call
-            const response = await fetch(`/user/repos?type=all&per_page=${perPage}`, {
-                headers: {
-                    Authorization: `Bearer ${process.env.REACT_APP_STATS_API_TOKEN}`
-                }
-            });
+            // Fetch aggregated language data from your Render backend
+            const response = await fetch('https://github-proxy-server.onrender.com/github-languages');
 
             if (!response.ok) {
-                throw new Error(`Failed to fetch repositories: ${response.statusText}`);
+                throw new Error(`Failed to fetch language data: ${response.statusText}`);
             }
 
-            const allRepos = await response.json();
-            // console.log('Total Repositories Fetched:', allRepos.length);
-            const languagesData = {};
-
-            // Fetch languages for each repo using a relative URL
-            for (const repo of allRepos) {
-                const relativeLanguagesUrl = repo.languages_url.replace('https://api.github.com', '');
-                const languagesResponse = await fetch(relativeLanguagesUrl, {
-                    headers: {
-                        Authorization: `Bearer ${process.env.REACT_APP_STATS_API_TOKEN}`
-                    }
-                });
-
-                if (languagesResponse.ok) {
-                    const repoLanguages = await languagesResponse.json();
-                    // console.log(`Languages for repo ${repo.name}:`, repoLanguages); // Log languages for each repo
-
-                    for (const [language, count] of Object.entries(repoLanguages)) {
-                        languagesData[language] = (languagesData[language] || 0) + count;
-                    }
-                } else {
-                    console.error(`Failed to fetch languages for repo: ${repo.name}`);
-                }
-            }
-
+            const languagesData = await response.json();
             setLanguages(languagesData);
             setLoading(false);
         } catch (err) {
-            console.error('Error fetching languages or repositories:', err);
-            setError(err.message); // Set the error message so it can be displayed in the UI
+            console.error('Error fetching languages:', err);
+            setError(err.message);
             setLoading(false);
         }
     };
-
-    useEffect(() => {
-        // console.log('Environment Token (GithubStats Component):', process.env.REACT_APP_STATS_API_TOKEN || 'Token is undefined');
-    }, []); // DEBUGGING: Check if the token is available    
 
     useEffect(() => {
         fetchLanguages();

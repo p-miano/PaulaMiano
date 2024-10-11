@@ -23,8 +23,8 @@ function About() {
                     </div>
                     {/* Download Resume Button - Centered */}
                     <div className="text-center mt-5"> 
-                        <a href="/PaulaMiano/PaulaMiano.pdf" download className="btn btn-outline-primary">
-                            Download My Resume
+                        <a href="/PaulaMiano/PaulaMiano.pdf" target="_blank" rel="noopener noreferrer" className="btn btn-outline-primary">
+                            View My Resume
                         </a>
                     </div>
                 </div>
