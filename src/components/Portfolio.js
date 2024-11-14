@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { parseISO, compareAsc, compareDesc } from 'date-fns';
 
 const Portfolio = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
@@ -23,8 +22,8 @@ const Portfolio = () => {
                         description: repo.description,
                         githubLink: repo.html_url,
                         deployedLink: repo.homepage || null,
-                        createdAt: repo.created_at, // Keep date as ISO string from API
-                        updatedAt: repo.updated_at, // Keep date as ISO string from API
+                        createdAt: new Date(repo.created_at).getTime(), // Convert to timestamp
+                        updatedAt: new Date(repo.updated_at).getTime(), // Convert to timestamp
                         topics: repo.topics // Include topics for display on card
                     }));
 
@@ -58,13 +57,9 @@ const Portfolio = () => {
             if (sortOption === 'title') {
                 return sortOrder === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
             } else if (sortOption === 'createdAt') {
-                const dateA = parseISO(a.createdAt); // Use parseISO on ISO date string
-                const dateB = parseISO(b.createdAt);
-                return sortOrder === 'asc' ? compareAsc(dateA, dateB) : compareDesc(dateA, dateB);
+                return sortOrder === 'asc' ? a.createdAt - b.createdAt : b.createdAt - a.createdAt;
             } else if (sortOption === 'updatedAt') {
-                const dateA = parseISO(a.updatedAt); // Use parseISO on ISO date string
-                const dateB = parseISO(b.updatedAt);
-                return sortOrder === 'asc' ? compareAsc(dateA, dateB) : compareDesc(dateA, dateB);
+                return sortOrder === 'asc' ? a.updatedAt - b.updatedAt : b.updatedAt - a.updatedAt;
             }
             return 0;
         });
