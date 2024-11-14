@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/PaulaMiano/static/css/main.eebb4c65.css",
-    "main.js": "/PaulaMiano/static/js/main.8d62e156.js",
+    "main.css": "/PaulaMiano/static/css/main.69d55add.css",
+    "main.js": "/PaulaMiano/static/js/main.1ecb3719.js",
     "static/js/453.978c7d90.chunk.js": "/PaulaMiano/static/js/453.978c7d90.chunk.js",
     "static/media/home-illustration.webp": "/PaulaMiano/static/media/home-illustration.286ae6c51bf07aee4bcc.webp",
     "static/media/bootstrap-icons.woff?": "/PaulaMiano/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
     "static/media/bootstrap-icons.woff2?": "/PaulaMiano/static/media/bootstrap-icons.b7bcc075b395c14ce8c2.woff2",
     "index.html": "/PaulaMiano/index.html",
-    "main.eebb4c65.css.map": "/PaulaMiano/static/css/main.eebb4c65.css.map",
-    "main.8d62e156.js.map": "/PaulaMiano/static/js/main.8d62e156.js.map",
+    "main.69d55add.css.map": "/PaulaMiano/static/css/main.69d55add.css.map",
+    "main.1ecb3719.js.map": "/PaulaMiano/static/js/main.1ecb3719.js.map",
     "453.978c7d90.chunk.js.map": "/PaulaMiano/static/js/453.978c7d90.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.eebb4c65.css",
-    "static/js/main.8d62e156.js"
+    "static/css/main.69d55add.css",
+    "static/js/main.1ecb3719.js"
   ]
 }
