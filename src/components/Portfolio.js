@@ -58,16 +58,16 @@ const Portfolio = () => {
                 return sortOrder === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
             } else if (sortOption === 'createdAt') {
                 return sortOrder === 'asc' 
-                    ? new Date(a.createdAt) - new Date(b.createdAt) 
-                    : new Date(b.createdAt) - new Date(a.createdAt);
+                    ? new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+                    : new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
             } else if (sortOption === 'updatedAt') {
                 return sortOrder === 'asc' 
-                    ? new Date(a.updatedAt) - new Date(b.updatedAt) 
-                    : new Date(b.updatedAt) - new Date(a.updatedAt);
+                    ? new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime()
+                    : new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
             }
             return 0;
         });
-    };
+    };  
 
     const filteredProjectsByCategory = filteredProjects.filter(project => {
         return selectedCategory === 'All' || project.category === selectedCategory;
