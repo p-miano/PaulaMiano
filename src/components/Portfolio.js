@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { parseISO, compareAsc, compareDesc } from 'date-fns';
 
 const Portfolio = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
@@ -22,8 +23,8 @@ const Portfolio = () => {
                         description: repo.description,
                         githubLink: repo.html_url,
                         deployedLink: repo.homepage || null,
-                        createdAt: new Date(repo.created_at).toLocaleDateString(),
-                        updatedAt: new Date(repo.updated_at).toLocaleDateString(),
+                        createdAt: repo.created_at, // Keep date as ISO string from API
+                        updatedAt: repo.updated_at, // Keep date as ISO string from API
                         topics: repo.topics // Include topics for display on card
                     }));
 
@@ -57,17 +58,17 @@ const Portfolio = () => {
             if (sortOption === 'title') {
                 return sortOrder === 'asc' ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title);
             } else if (sortOption === 'createdAt') {
-                return sortOrder === 'asc' 
-                    ? new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
-                    : new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+                const dateA = parseISO(a.createdAt); // Use parseISO on ISO date string
+                const dateB = parseISO(b.createdAt);
+                return sortOrder === 'asc' ? compareAsc(dateA, dateB) : compareDesc(dateA, dateB);
             } else if (sortOption === 'updatedAt') {
-                return sortOrder === 'asc' 
-                    ? new Date(a.updatedAt).getTime() - new Date(b.updatedAt).getTime()
-                    : new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
+                const dateA = parseISO(a.updatedAt); // Use parseISO on ISO date string
+                const dateB = parseISO(b.updatedAt);
+                return sortOrder === 'asc' ? compareAsc(dateA, dateB) : compareDesc(dateA, dateB);
             }
             return 0;
         });
-    };  
+    };
 
     const filteredProjectsByCategory = filteredProjects.filter(project => {
         return selectedCategory === 'All' || project.category === selectedCategory;
