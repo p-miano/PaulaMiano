@@ -299,13 +299,43 @@ section {
   font-size: 2.5rem;
   font-weight: bold;
   text-align: left;
+  color: #e83e8c; /* Set section title color to pink */
+}
+
+.filter-sort-container {
+  display: flex;
+  justify-content: center; /* Center both sections */
+  align-items: center;
+  gap: 1.5rem; /* Space between filter, divider, and sorting */
+  margin-bottom: 2rem; /* Add spacing between this section and the project cards */
+}
+
+.divider {
+  width: 1px;
+  height: 40px; /* Increase height to make it more visible */
+  background-color: #e83e8c; /* Use pink color for visibility */
+  opacity: 0.7; /* Slight transparency for style */
+}
+
+.text-pink {
+  color: #e83e8c;
+  font-weight: bold;
+}
+
+.portfolio-filters span {
+  color: #6c757d; 
+  font-weight: bold; 
+}
+
+.portfolio-sorting span {
+  color: #6c757d; 
+  font-weight: bold; 
 }
 
 .portfolio-filters .btn {
   margin-right: 10px;
   margin-bottom: 10px;
   font-size: 1rem;
-  border-radius: 50px; /* Rounded filter buttons */
 }
 
 .portfolio-filters .btn-primary {
@@ -315,6 +345,17 @@ section {
 }
 
 .portfolio-filters .btn-light {
+  background-color: #f8f9fa;
+  color: #6c757d;
+}
+
+.portfolio-sorting .btn-primary {
+  background-color: #e83e8c;
+  color: white;
+  border-color: #e83e8c;
+}
+
+.portfolio-sorting .btn-light {
   background-color: #f8f9fa;
   color: #6c757d;
 }
