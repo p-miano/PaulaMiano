@@ -91,10 +91,10 @@ const Skills = () => {
                                 <FaCloud className="icon mb-3" size={50} />
                                 <h5 className="card-title">Cloud Services</h5>
                                 <p className="skill-text">
-                                    <strong>Microsoft Azure, Firebase</strong><br />
+                                    <strong>AWS, Microsoft Azure, Firebase, Render</strong><br />
                                     <span className="joke-text">– Figuring out the dance in the cloud, but I’ve got the basics down.</span><br />
-                                    <strong>Azure App Services</strong><br />
-                                    <span className="joke-text">– I can deploy apps without breaking too many things.</span>
+                                    <strong>App Services, AWS Cognito, Lambda Functions, Cloud Watch </strong><br />
+                                    <span className="joke-text">– Code runs, logs flow, and I’m still friends with the dashboards.</span>
                                 </p>
                             </div>
                         </div>
